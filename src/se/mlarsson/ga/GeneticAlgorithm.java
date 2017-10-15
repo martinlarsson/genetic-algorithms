@@ -52,4 +52,41 @@ public class GeneticAlgorithm {
         }
         return false;
     }
+
+    public Individual selectParent(Population population) {
+        Individual individuals[] = population.getIndividuals();
+        double populationFitness = population.getPopulationFitness();
+        double rouletteWheelPosition = Math.random() * populationFitness;
+        double spinWheel = 0;
+        for (Individual individual : individuals) {
+            spinWheel += individual.getFitness();
+            if (spinWheel >= rouletteWheelPosition) {
+                return individual;
+            }
+        }
+        return individuals[population.size() - 1];
+    }
+
+    public Population crossoverPopulation(Population population) {
+        Population newPopulation = new Population(population.size());
+        for (int i = 0; i < population.size(); i++) {
+            Individual parent1 = population.getFittest(i);
+            if (this.crossoverRate > Math.random() && i > this.elitismCount) {
+                Individual offspring = new Individual(
+                        parent1.getChromosomeLength());
+                Individual parent2 = selectParent(population);
+                for (int j = 0; j < parent1.getChromosomeLength(); j++) {
+                    if (0.5 > Math.random()) {
+                        offspring.setGene(j, parent1.getGene(j));
+                    } else {
+                        offspring.setGene(j, parent2.getGene(j));
+                    }
+                }
+                newPopulation.setIndividual(i, offspring);
+            } else {
+                newPopulation.setIndividual(i, parent1);
+            }
+        }
+        return newPopulation;
+    }
 }

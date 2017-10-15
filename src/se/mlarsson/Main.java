@@ -13,7 +13,7 @@ public class Main {
         while (!ga.isTerminationConditionMet(population)) {
             System.out.println("Best solution: "+
                     population.getFittest(0).toString());
-            //TODO Apply crossover
+            population = ga.crossoverPopulation(population);
             //TODO Apply mutation
             ga.evalPopulation(population);
             generation++;
