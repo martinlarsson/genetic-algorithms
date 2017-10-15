@@ -10,7 +10,7 @@ public class Main {
         Population population = ga.initPopulation(50);
         ga.evalPopulation(population);
         int generation = 1;
-        while (ga.isTerminationConditionMet(population) == false) {
+        while (!ga.isTerminationConditionMet(population)) {
             System.out.println("Best solution: "+
                     population.getFittest(0).toString());
             population = ga.crossoverPopulation(population);

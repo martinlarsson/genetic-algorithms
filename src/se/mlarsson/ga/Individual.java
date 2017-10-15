@@ -44,10 +44,10 @@ public class Individual {
     }
 
     public String toString() {
-        String output = "";
-        for (int gene = 0; gene < this.chromosome.length; gene++) {
-            output += this.chromosome[gene];
+        StringBuilder output = new StringBuilder();
+        for (int gene : this.chromosome) {
+            output.append(gene);
         }
-        return output;
+        return output.toString();
     }
 }

@@ -1,7 +1,5 @@
 package se.mlarsson.ga;
 
-import com.sun.org.apache.bcel.internal.generic.POP;
-
 public class GeneticAlgorithm {
     private int populationSize;
     private double mutationRate;
@@ -16,12 +14,11 @@ public class GeneticAlgorithm {
     }
 
     public Population initPopulation(int chromosomeLength) {
-        Population population = new Population(this.populationSize,
+        return new Population(this.populationSize,
                 chromosomeLength);
-        return population;
     }
 
-    public double calcFitness(Individual individual) {
+    private double calcFitness(Individual individual) {
         int correctGenes = 0;
         for (int i = 0; i < individual.getChromosomeLength(); i++) {
             if (individual.getGene(i) == 1) {
@@ -46,14 +43,12 @@ public class GeneticAlgorithm {
 
     public boolean isTerminationConditionMet(Population population) {
         for (Individual individual : population.getIndividuals()) {
-            if (individual.getFitness() == 1) {
-                return true;
-            }
+            if (individual.getFitness() == 1) return true;
         }
         return false;
     }
 
-    public Individual selectParent(Population population) {
+    private Individual selectParent(Population population) {
         Individual individuals[] = population.getIndividuals();
         double populationFitness = population.getPopulationFitness();
         double rouletteWheelPosition = Math.random() * populationFitness;
