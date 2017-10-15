@@ -71,7 +71,7 @@ public class GeneticAlgorithm {
         Population newPopulation = new Population(population.size());
         for (int i = 0; i < population.size(); i++) {
             Individual parent1 = population.getFittest(i);
-            if (this.crossoverRate > Math.random() && i > this.elitismCount) {
+            if (this.crossoverRate > Math.random() && i >= this.elitismCount) {
                 Individual offspring = new Individual(
                         parent1.getChromosomeLength());
                 Individual parent2 = selectParent(population);
@@ -86,6 +86,26 @@ public class GeneticAlgorithm {
             } else {
                 newPopulation.setIndividual(i, parent1);
             }
+        }
+        return newPopulation;
+    }
+
+    public Population mutatePopulation(Population population) {
+        Population newPopulation = new Population(this.populationSize);
+        for (int i = 0; i < population.size(); i++) {
+            Individual individual = population.getFittest(i);
+            for (int j = 0; j < individual.getChromosomeLength(); j++) {
+                if (i > this.elitismCount) {
+                    if (this.mutationRate > Math.random()) {
+                        int newGene = 1;
+                        if (individual.getGene(j) == 1) {
+                            newGene = 0;
+                        }
+                        individual.setGene(j, newGene);
+                    }
+                }
+            }
+            newPopulation.setIndividual(i, individual);
         }
         return newPopulation;
     }
