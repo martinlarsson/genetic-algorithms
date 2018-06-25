@@ -1,12 +1,12 @@
 package se.mlarsson.ga;
 
-public class GeneticAlgorithm {
+public class BasicGeneticAlgorithm {
     private int populationSize;
     private double mutationRate;
     private double crossoverRate;
     private int elitismCount;
 
-    public GeneticAlgorithm(int populationSize, double mutationRate, double crossoverRate, int elitismCount) {
+    public BasicGeneticAlgorithm(int populationSize, double mutationRate, double crossoverRate, int elitismCount) {
         this.populationSize = populationSize;
         this. mutationRate = mutationRate;
         this.crossoverRate = crossoverRate;
