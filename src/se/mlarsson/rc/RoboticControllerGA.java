@@ -9,7 +9,8 @@ public class RoboticControllerGA {
     private double crossoverRate;
     private int elitismCount;
 
-    public RoboticControllerGA(int populationSize, double mutationRate, double crossoverRate, int elitismCount) {
+    public RoboticControllerGA(int populationSize, double mutationRate,
+                               double crossoverRate, int elitismCount) {
         this.populationSize = populationSize;
         this. mutationRate = mutationRate;
         this.crossoverRate = crossoverRate;
